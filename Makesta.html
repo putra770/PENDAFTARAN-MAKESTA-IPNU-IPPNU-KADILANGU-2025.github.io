@@ -1,0 +1,636 @@
+<!doctype html>
+<html lang="id">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pendaftaran MAKESTA</title>
+  <script src="/_sdk/data_sdk.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&amp;family=Montserrat:wght@400;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', 'Segoe UI', sans-serif;
+            min-height: 100%;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInFromTop {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes checkmark {
+            0% {
+                transform: scale(0) rotate(-45deg);
+            }
+            50% {
+                transform: scale(1.2) rotate(-45deg);
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+
+        @keyframes glowPulse {
+            0%, 100% {
+                text-shadow: 0 0 10px rgba(255,255,255,0.3), 0 0 20px rgba(255,255,255,0.2);
+            }
+            50% {
+                text-shadow: 0 0 20px rgba(255,255,255,0.5), 0 0 40px rgba(255,255,255,0.3), 0 0 60px rgba(255,255,255,0.2);
+            }
+        }
+
+        .app-container {
+            width: 100%;
+            min-height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-size: 200% 200%;
+            animation: gradientShift 10s ease infinite;
+            padding: 2rem 1rem;
+        }
+
+        .main-wrapper {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-wrapper, .registration-list-wrapper {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .header h1 {
+            margin: 0 0 1rem 0;
+            font-size: 2rem;
+            font-weight: 900;
+            line-height: 1.2;
+            position: relative;
+            z-index: 1;
+            animation: slideInFromTop 0.6s ease-out, glowPulse 3s ease-in-out infinite;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #ffffff 0%, #f0f0f0 50%, #ffffff 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: slideInFromTop 0.6s ease-out, shimmer 3s linear infinite, glowPulse 3s ease-in-out infinite;
+        }
+
+        .header-info {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+            animation: slideInFromTop 0.8s ease-out;
+        }
+
+        .header-info p {
+            margin: 0.5rem 0;
+            transition: transform 0.3s ease;
+        }
+
+        .header-info p:hover {
+            transform: translateX(5px);
+        }
+
+        .form-content {
+            padding: 2rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .form-group:nth-child(1) { animation-delay: 0.1s; }
+        .form-group:nth-child(2) { animation-delay: 0.15s; }
+        .form-group:nth-child(3) { animation-delay: 0.2s; }
+        .form-group:nth-child(4) { animation-delay: 0.25s; }
+        .form-group:nth-child(5) { animation-delay: 0.3s; }
+        .form-group:nth-child(6) { animation-delay: 0.35s; }
+        .form-group:nth-child(7) { animation-delay: 0.4s; }
+        .form-group:nth-child(8) { animation-delay: 0.45s; }
+        .form-group:nth-child(9) { animation-delay: 0.5s; }
+        .form-group:nth-child(10) { animation-delay: 0.55s; }
+        .form-group:nth-child(11) { animation-delay: 0.6s; }
+        .form-group:nth-child(12) { animation-delay: 0.65s; }
+        .form-group:nth-child(13) { animation-delay: 0.7s; }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .required {
+            color: #e53e3e;
+            margin-left: 0.25rem;
+            display: inline-block;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: white;
+            position: relative;
+        }
+
+        .form-input:hover,
+        .form-textarea:hover,
+        .form-select:hover {
+            border-color: #cbd5e0;
+            transform: translateY(-1px);
+        }
+
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1), 0 4px 12px rgba(102, 126, 234, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .date-group {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1rem;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-size: 200% 200%;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-top: 1rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out 0.75s forwards;
+        }
+
+        .submit-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .submit-button:hover:not(:disabled)::before {
+            left: 100%;
+        }
+
+        .submit-button:hover:not(:disabled) {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.5);
+            background-position: 100% 0;
+        }
+
+        .submit-button:active:not(:disabled) {
+            transform: translateY(-1px) scale(1);
+        }
+
+        .submit-button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.8s linear infinite;
+            margin-right: 0.5rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .thank-you-page {
+            display: none;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .thank-you-page.active {
+            display: block;
+            animation: scaleIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            animation: checkmark 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            position: relative;
+        }
+
+        .success-icon::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            animation: pulse 2s ease-in-out infinite;
+            opacity: 0.5;
+            z-index: -1;
+        }
+
+        .thank-you-title {
+            font-size: 2rem;
+            color: #2d3748;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            animation: fadeInUp 0.6s ease-out 0.2s backwards;
+        }
+
+        .thank-you-message {
+            font-size: 1.1rem;
+            color: #4a5568;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.6s ease-out 0.4s backwards;
+        }
+
+
+
+        @media (max-width: 640px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .form-content {
+                padding: 1.5rem;
+            }
+
+            .date-group {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="app-container">
+   <div class="main-wrapper"><!-- Form Section -->
+    <div class="form-wrapper">
+     <div class="header">
+      <h1 id="judul-acara">MAKESTA PR IPNU IPPNU KADILANGU 2025</h1>
+      <div class="header-info">
+       <p id="tanggal-acara">📅 Tanggal: 29 - 31 Desember 2025</p>
+       <p id="alamat-acara">📍 Alamat: Madrasah Mansyaul Ulum, Desa Kadilangu, Kec.Trangkil, Kab.Pati.</p>
+       <p id="kontak-acara">📞 Hubungi Kami di no rekan/rekanita +62 882-0032-02778/+62 853-8214-1171</p>
+      </div>
+     </div>
+     <div class="form-content" id="form-page">
+      <form id="registration-form">
+       <div class="form-group"><label for="nama-lengkap" class="form-label">Nama Lengkap<span class="required">*</span></label> <input type="text" id="nama-lengkap" class="form-input" required>
+       </div>
+       <div class="form-group"><label for="nik" class="form-label">NIK<span class="required">*</span></label> <input type="text" id="nik" class="form-input" required pattern="[0-9]{16}" maxlength="16">
+       </div>
+       <div class="form-group"><label class="form-label">Tempat &amp; Tanggal Lahir<span class="required">*</span></label>
+        <div class="date-group"><input type="text" id="tempat-lahir" class="form-input" placeholder="Tempat Lahir" required> <input type="date" id="tanggal-lahir" class="form-input" required>
+        </div>
+       </div>
+       <div class="form-group"><label for="email" class="form-label">Email<span class="required">*</span></label> <input type="email" id="email" class="form-input" required>
+       </div>
+       <div class="form-group"><label for="nama-ayah" class="form-label">Nama Ayah<span class="required">*</span></label> <input type="text" id="nama-ayah" class="form-input" required>
+       </div>
+       <div class="form-group"><label for="nama-ibu" class="form-label">Nama Ibu<span class="required">*</span></label> <input type="text" id="nama-ibu" class="form-input" required>
+       </div>
+       <div class="form-group"><label for="nomor-whatsapp" class="form-label">Nomor WhatsApp<span class="required">*</span></label> <input type="tel" id="nomor-whatsapp" class="form-input" placeholder="08xxxxxxxxxx" required>
+       </div>
+       <div class="form-group"><label for="asal-ranting" class="form-label">Asal Ranting<span class="required">*</span></label> <input type="text" id="asal-ranting" class="form-input" required>
+       </div>
+       <div class="form-group"><label for="pendidikan" class="form-label">Pendidikan<span class="required">*</span></label> <select id="pendidikan" class="form-select" required> <option value="">Pilih Pendidikan</option> <option value="SD/MI">SD/MI</option> <option value="SMP/MTs">SMP/MTs</option> <option value="SMA/MA/SMK">SMA/MA/SMK</option>  <option value="S1">S1</option> <option value="S2">S2</option> <option value="S3">S3</option> </select>
+       </div>
+       <div class="form-group"><label for="asal-sekolah" class="form-label">Asal Sekolah<span class="required">*</span></label> <input type="text" id="asal-sekolah" class="form-input" required>
+       </div>
+       <div class="form-group"><label for="hobi" class="form-label">Hobi<span class="required">*</span></label> <input type="text" id="hobi" class="form-input" required>
+       </div>
+       <div class="form-group"><label for="pesan-kesan" class="form-label">Pesan &amp; Kesan Kamu<span class="required">*</span></label> <textarea id="pesan-kesan" class="form-textarea" required></textarea>
+       </div>
+       <div class="form-group"><label for="motto-hidup" class="form-label">Motto Hidup<span class="required">*</span></label> <textarea id="motto-hidup" class="form-textarea" required></textarea>
+       </div><button type="submit" class="submit-button" id="submit-button"> Daftar Sekarang </button>
+      </form>
+     </div>
+     <div class="thank-you-page" id="thank-you-page">
+      <div class="success-icon">
+       ✓
+      </div>
+      <h2 class="thank-you-title">Terima Kasih!</h2>
+      <p class="thank-you-message" id="pesan-terimakasih-text">Pendaftaran Anda telah berhasil diterima. Kami akan segera menghubungi Anda melalui nomor WhatsApp yang telah Anda daftarkan. Sampai jumpa di acara MAKESTA PR IPNU IPPNU KADILANGU 2025!</p>
+     </div>
+    </div>
+   </div>
+  </div>
+  <script>
+        const defaultConfig = {
+            judul: "MAKESTA PR IPNU IPPNU KADILANGU 2025",
+            tanggal: "29 - 31 Desember 2025",
+            alamat: "Madrasah Mansyaul Ulum, Desa Kadilangu, Kec.Trangkil, Kab.Pati.",
+            kontak: "Hubungi Kami di no rekan/rekanita +62 882-0032-02778/+62 853-8214-1171",
+            pesan_terimakasih: "Pendaftaran Anda telah berhasil diterima. Kami akan segera menghubungi Anda melalui nomor WhatsApp yang telah Anda daftarkan. Sampai jumpa di acara MAKESTA PR IPNU IPPNU KADILANGU 2025!",
+            background_color: "#667eea",
+            secondary_color: "#764ba2",
+            text_color: "#2d3748",
+            surface_color: "#ffffff"
+        };
+
+        let allRegistrants = [];
+
+        async function onConfigChange(config) {
+            const judul = config.judul || defaultConfig.judul;
+            const tanggal = config.tanggal || defaultConfig.tanggal;
+            const alamat = config.alamat || defaultConfig.alamat;
+            const kontak = config.kontak || defaultConfig.kontak;
+            const pesanTerimakasih = config.pesan_terimakasih || defaultConfig.pesan_terimakasih;
+            const bgColor = config.background_color || defaultConfig.background_color;
+            const secondaryColor = config.secondary_color || defaultConfig.secondary_color;
+            const textColor = config.text_color || defaultConfig.text_color;
+            const surfaceColor = config.surface_color || defaultConfig.surface_color;
+
+            document.getElementById('judul-acara').textContent = judul;
+            document.getElementById('tanggal-acara').textContent = `📅 Tanggal: ${tanggal}`;
+            document.getElementById('alamat-acara').textContent = `📍 Alamat: ${alamat}`;
+            document.getElementById('kontak-acara').textContent = `📞 ${kontak}`;
+            document.getElementById('pesan-terimakasih-text').textContent = pesanTerimakasih;
+
+            document.querySelector('.app-container').style.background = `linear-gradient(135deg, ${bgColor} 0%, ${secondaryColor} 100%)`;
+            
+            document.querySelectorAll('.header').forEach(el => {
+                el.style.background = `linear-gradient(135deg, ${bgColor} 0%, ${secondaryColor} 100%)`;
+            });
+            
+            document.querySelector('.submit-button').style.background = `linear-gradient(135deg, ${bgColor} 0%, ${secondaryColor} 100%)`;
+            document.querySelector('.success-icon').style.background = `linear-gradient(135deg, ${bgColor} 0%, ${secondaryColor} 100%)`;
+            
+            document.querySelector('.form-wrapper').style.background = surfaceColor;
+            
+            document.querySelector('.form-content').style.color = textColor;
+            document.querySelectorAll('.form-label').forEach(el => el.style.color = textColor);
+            document.querySelector('.thank-you-title').style.color = textColor;
+        }
+
+        function mapToCapabilities(config) {
+            return {
+                recolorables: [
+                    {
+                        get: () => config.background_color || defaultConfig.background_color,
+                        set: (value) => {
+                            config.background_color = value;
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ background_color: value });
+                            }
+                        }
+                    },
+                    {
+                        get: () => config.secondary_color || defaultConfig.secondary_color,
+                        set: (value) => {
+                            config.secondary_color = value;
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ secondary_color: value });
+                            }
+                        }
+                    },
+                    {
+                        get: () => config.text_color || defaultConfig.text_color,
+                        set: (value) => {
+                            config.text_color = value;
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ text_color: value });
+                            }
+                        }
+                    },
+                    {
+                        get: () => config.surface_color || defaultConfig.surface_color,
+                        set: (value) => {
+                            config.surface_color = value;
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ surface_color: value });
+                            }
+                        }
+                    }
+                ],
+                borderables: [],
+                fontEditable: undefined,
+                fontSizeable: undefined
+            };
+        }
+
+        function mapToEditPanelValues(config) {
+            return new Map([
+                ["judul", config.judul || defaultConfig.judul],
+                ["tanggal", config.tanggal || defaultConfig.tanggal],
+                ["alamat", config.alamat || defaultConfig.alamat],
+                ["kontak", config.kontak || defaultConfig.kontak],
+                ["pesan_terimakasih", config.pesan_terimakasih || defaultConfig.pesan_terimakasih]
+            ]);
+        }
+
+
+
+        const dataHandler = {
+            onDataChanged(data) {
+                allRegistrants = data;
+            }
+        };
+
+        async function initializeApp() {
+            if (window.dataSdk) {
+                await window.dataSdk.init(dataHandler);
+            }
+
+            if (window.elementSdk) {
+                await window.elementSdk.init({
+                    defaultConfig,
+                    onConfigChange,
+                    mapToCapabilities,
+                    mapToEditPanelValues
+                });
+            }
+
+            setupFormHandler();
+        }
+
+        function setupFormHandler() {
+            const form = document.getElementById('registration-form');
+            const submitButton = document.getElementById('submit-button');
+            const formPage = document.getElementById('form-page');
+            const thankYouPage = document.getElementById('thank-you-page');
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                submitButton.disabled = true;
+                submitButton.innerHTML = '<span class="loading-spinner"></span>Mengirim...';
+
+                const formData = {
+                    nama_lengkap: document.getElementById('nama-lengkap').value,
+                    nik: document.getElementById('nik').value,
+                    tempat_lahir: document.getElementById('tempat-lahir').value,
+                    tanggal_lahir: document.getElementById('tanggal-lahir').value,
+                    email: document.getElementById('email').value,
+                    nama_ayah: document.getElementById('nama-ayah').value,
+                    nama_ibu: document.getElementById('nama-ibu').value,
+                    nomor_whatsapp: document.getElementById('nomor-whatsapp').value,
+                    asal_ranting: document.getElementById('asal-ranting').value,
+                    pendidikan: document.getElementById('pendidikan').value,
+                    asal_sekolah: document.getElementById('asal-sekolah').value,
+                    hobi: document.getElementById('hobi').value,
+                    pesan_kesan: document.getElementById('pesan-kesan').value,
+                    motto_hidup: document.getElementById('motto-hidup').value,
+                    waktu_daftar: new Date().toISOString()
+                };
+
+                if (window.dataSdk) {
+                    await window.dataSdk.create(formData);
+                }
+
+                form.reset();
+                formPage.style.display = 'none';
+                thankYouPage.classList.add('active');
+            });
+        }
+
+        initializeApp();
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a693ca837db4ac2',t:'MTc2NDQ5NDA5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
